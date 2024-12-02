@@ -31,8 +31,7 @@ export const createEvent = async (req: Request, res: Response) => {
 
     if (overlappingEvent) {
       return res.status(409).json({
-        message: "This time slot is already occupied by another event",
-        code: "EVENT_CONFLICT",
+        message: "This time slot is already occupied!!",
       });
     }
 
