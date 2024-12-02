@@ -1,0 +1,1 @@
+{"root":["./src/index.ts","./src/middlewares/authmiddleware.ts","./src/controllers/authcontroller.ts","./src/controllers/eventcontroller.ts","./src/db/db.ts","./src/lib/helper.ts","./src/lib/zodvalidation.ts","./src/routes/authroutes.ts","./src/routes/eventroutes.ts"],"version":"5.7.2"}
