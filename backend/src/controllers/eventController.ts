@@ -40,7 +40,7 @@ export const createEvent = async (req: Request, res: Response) => {
         title,
         startTime: start,
         endTime: end,
-        tag,
+        tag : tag ?? 'OTHERS',
         userId,
       },
     });
@@ -50,7 +50,6 @@ export const createEvent = async (req: Request, res: Response) => {
     console.error("Event creation error:", error);
     res.status(500).json({
       message: "Failed to create event",
-      error: error instanceof Error ? error.message : "Unknown error",
     });
   }
 };
