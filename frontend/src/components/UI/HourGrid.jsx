@@ -1,7 +1,7 @@
 import React from 'react'
-import { formatTime } from '../../utils/dateHelper';
+import { formatTime, isEventInCurrentWeek } from '../../utils/dateHelper';
 
-  const GenerateHourGrid = ({events, handleGridClick}) => {
+  const GenerateHourGrid = ({events, handleGridClick , currentWeek}) => {
     const hourGrid = [];
     for (let hour = 0; hour < 24; hour++) {
       const displayHour = hour === 0 ? 12 : hour > 12 ? hour - 12 : hour;
@@ -17,7 +17,8 @@ import { formatTime } from '../../utils/dateHelper';
               const dayEvents = events.filter((event) => {
                 const eventDate = new Date(event.startTime);
                 return (
-                  eventDate.getDay() === day && eventDate.getHours() === hour
+                  eventDate.getDay() === day &&
+                  eventDate.getHours() === hour &&  isEventInCurrentWeek(eventDate, currentWeek)
                 );
               });
 

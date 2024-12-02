@@ -77,7 +77,7 @@ const WeeklyCalendar = () => {
   const handleGridClick = (hour, day) => {
     const selectedDate = new Date(currentWeek); 
     console.log(selectedDate, day);
-    selectedDate.setDate(selectedDate.getDate() - selectedDate.getDay() + day);
+    selectedDate.setDate(selectedDate.getDate() + day);
     selectedDate.setHours(hour);
     
     setSelectedSlot({
@@ -110,7 +110,7 @@ const WeeklyCalendar = () => {
   return (
     <div className="container mx-auto p-4">
       <Header currentWeek={currentWeek} setCurrentWeek={setCurrentWeek}/>
-      <GenerateHourGrid  handleGridClick={handleGridClick} events={events}/>
+      <GenerateHourGrid  handleGridClick={handleGridClick} events={events} currentWeek={currentWeek}/>
       {showModal && (
         <EventModal
           onClose={() => setShowModal(false)}

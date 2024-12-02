@@ -1,4 +1,5 @@
 // Utility function to check for event overlaps
+import { startOfWeek, endOfWeek, isWithinInterval } from "date-fns";
 export const checkEventOverlap = (existingEvents, newEvent) => {
   return existingEvents.some((event) => {
     const existingStart = new Date(event.startTime);
@@ -22,14 +23,22 @@ export const formatTime = (date) => {
 };
 
 export const combineDateAndTime = (baseDate, timeString) => {
-  // Create a new date object from the selected slot's date
-  const combinedDateTime = new Date(baseDate);
+   const combinedDateTime = new Date(baseDate);
 
-  // If time is provided, set the hours and minutes
   if (timeString) {
     const [hours, minutes] = timeString.split(":").map(Number);
     combinedDateTime.setHours(hours, minutes, 0, 0);
   }
 
   return combinedDateTime;
+};
+
+export const isEventInCurrentWeek = (eventDate, currentWeek) => {
+  const startOfCurrentWeek = startOfWeek(currentWeek, { weekStartsOn: 0 }); 
+  const endOfCurrentWeek = endOfWeek(currentWeek, { weekStartsOn: 0 });
+
+  return isWithinInterval(eventDate, {
+    start: startOfCurrentWeek,
+    end: endOfCurrentWeek,
+  });
 };
