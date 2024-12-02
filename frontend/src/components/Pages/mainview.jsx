@@ -55,7 +55,6 @@ const WeeklyCalendar = () => {
   useEffect(() => {
     const postLatestEvent = async () => {
       if (events.length === 0) return;
-
       // since id can be compared due to dateobjs
       const latestEvent = events.reduce((latest, current) =>
         current.id > latest.id ? current : latest
@@ -78,7 +77,7 @@ const WeeklyCalendar = () => {
   const handleGridClick = (hour, day) => {
     const selectedDate = new Date(currentWeek); 
     console.log(selectedDate, day);
-    selectedDate.setDate(selectedDate.getDate() + day);
+    selectedDate.setDate(selectedDate.getDate() - selectedDate.getDay() + day);
     selectedDate.setHours(hour);
     
     setSelectedSlot({
