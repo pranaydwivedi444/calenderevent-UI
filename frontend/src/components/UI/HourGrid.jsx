@@ -34,7 +34,7 @@ import { formatTime, isEventInCurrentWeek } from '../../utils/dateHelper';
                     const durationHours = (endTime - startTime) / (1000 * 60 * 60);
                     return (
                       <div
-                        key={event.id}
+                        key={event.createdAt}
                         className="absolute inset-x-0 bg-blue-200 text-xs p-1 overflow-hidden"
                         style={{
                           height: `${durationHours * 3}rem`,

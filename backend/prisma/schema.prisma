@@ -35,7 +35,7 @@ model User {
 
 model Event {
   id          String    @id @default(cuid())
-  name        String
+  title        String
   startTime   DateTime
   endTime     DateTime
   tag         EventTag  @default(OTHER)

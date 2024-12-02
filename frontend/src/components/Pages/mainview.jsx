@@ -32,7 +32,7 @@ const WeeklyCalendar = () => {
     hour: new Date().getHours(),
     day: new Date().getDay(),
   });
-    const [currentWeek, setCurrentWeek] = useState(new Date());
+  const [currentWeek, setCurrentWeek] = useState(new Date());
   useEffect(() => {
     const fetchEvents = async () => {
       try {
@@ -56,9 +56,11 @@ const WeeklyCalendar = () => {
     const postLatestEvent = async () => {
       if (events.length === 0) return;
       // since id can be compared due to dateobjs
-      const latestEvent = events.reduce((latest, current) =>
-        current.id > latest.id ? current : latest
-      );
+       const latestEvent = events.reduce((latest, current) =>
+         new Date(current.createdAt) > new Date(latest.createdAt)
+           ? current
+           : latest
+       );
 
       try {
         const response = await axios.post("/api/events", latestEvent, {
@@ -77,7 +79,7 @@ const WeeklyCalendar = () => {
   const handleGridClick = (hour, day) => {
     const selectedDate = new Date(currentWeek); 
     console.log(selectedDate, day);
-    selectedDate.setDate(selectedDate.getDate() + day);
+    selectedDate.setDate(selectedDate.getDate() - selectedDate.getDay() + day);
     selectedDate.setHours(hour);
     
     setSelectedSlot({
@@ -91,7 +93,7 @@ const WeeklyCalendar = () => {
   const handleCreateEvent = (eventData) => {
     const newEvent = {
       ...eventData,
-      id: Date.now(),
+      createdAt: Date.now(),
     };
 
     if (checkEventOverlap(events, newEvent)) {
