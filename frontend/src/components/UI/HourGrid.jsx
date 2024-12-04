@@ -1,5 +1,6 @@
 import React from "react";
 import { isEventInCurrentWeek, formatTime } from "../../utils/dateHelper";
+import DayCell from "./DayCell";
 
 const HourLabel = ({ hour }) => {
   const displayHour = hour === 0 ? 12 : hour > 12 ? hour - 12 : hour;
@@ -7,52 +8,6 @@ const HourLabel = ({ hour }) => {
   return (
     <div className="w-16 flex items-start justify-center text-sm">
       {`${displayHour} ${amPm}`}
-    </div>
-  );
-};
-
-const DayCell = ({ day, hour, events, handleGridClick, currentWeek }) => {
-  const filteredEvents = events.filter((event) => {
-    const eventDate = new Date(event.startTime);
-    return (
-      eventDate.getDay() === day &&
-      eventDate.getHours() === hour &&
-      isEventInCurrentWeek(eventDate, currentWeek)
-    );
-  });
-
-  return (
-    <div
-      key={`hour-${hour}-day-${day}`}
-      className="border-r h-12 relative"
-      onClick={() => handleGridClick(hour, day)}
-    >
-      {filteredEvents.map((event) => (
-        <EventMarker key={event.createdAt} event={event} />
-      ))}
-    </div>
-  );
-};
-
-const EventMarker = ({ event }) => {
-  const startTime = new Date(event.startTime);
-  const endTime = new Date(event.endTime);
-  const durationHours = (endTime - startTime) / (1000 * 60 * 60);
-
-  return (
-    <div
-      className="absolute inset-x-0 bg-blue-200 text-xs p-1 overflow-hidden"
-      style={{
-        height: `${durationHours * 3}rem`,
-        top: `${(startTime.getMinutes() / 60) * 3}rem`,
-      }}
-    >
-      <span className="text-base">{event.title}</span>
-      <br />
-      <span className="text-sm">
-        {formatTime(startTime)} - {formatTime(endTime)}
-      </span>
-      <span className="text-sm">{event.tag ?? ""}</span>
     </div>
   );
 };

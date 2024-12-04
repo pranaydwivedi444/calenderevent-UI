@@ -1,5 +1,5 @@
 // Utility function to check for event overlaps
-import { startOfWeek, endOfWeek, isWithinInterval } from "date-fns";
+import { startOfWeek, endOfWeek, isWithinInterval , isSameWeek } from "date-fns";
 export const checkEventOverlap = (existingEvents, newEvent) => {
   return existingEvents.some((event) => {
     const existingStart = new Date(event.startTime);
@@ -36,7 +36,7 @@ export const combineDateAndTime = (baseDate, timeString) => {
 export const isEventInCurrentWeek = (eventDate, currentWeek) => {
   const startOfCurrentWeek = startOfWeek(currentWeek, { weekStartsOn: 0 }); 
   const endOfCurrentWeek = endOfWeek(currentWeek, { weekStartsOn: 0 });
-
+  // return  isSameWeek(currentWeek, eventDate);
   return isWithinInterval(eventDate, {
     start: startOfCurrentWeek,
     end: endOfCurrentWeek,

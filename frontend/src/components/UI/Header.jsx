@@ -7,8 +7,7 @@ import {
   eachDayOfInterval,
   parseISO,
 } from "date-fns";
-function Header({currentWeek , setCurrentWeek}) {
-
+function Header({ currentWeek, setCurrentWeek }) {
   const changeWeek = (direction) => {
     setCurrentWeek((prevWeek) => addWeeks(prevWeek, direction));
   };
@@ -17,7 +16,7 @@ function Header({currentWeek , setCurrentWeek}) {
     start: startOfWeek(currentWeek),
     end: endOfWeek(currentWeek),
   });
-//   const [search,setSearch] = useState('');
+  //   const [search,setSearch] = useState('');
   return (
     <div className="sticky top-0 z-40 bg-white ">
       <div className="flex  items-center gap-3 bg-slate-50 mb-4 p-3">
