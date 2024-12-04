@@ -1,7 +1,8 @@
 import {React ,useState} from 'react'
 import ButtonPrimary from '../UI/Buttons/Button_Primary';
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { backendUrl } from '../../config';
 
 
 function Login() {
@@ -18,10 +19,10 @@ function Login() {
            `${backendUrl}/api/auth/login`,
            formData
          );
-         if (response.data.success) {
-           setTimeout(() => {
-             navigate("/blog/all");
-           }, 4 * 1000);
+         console.log(response)
+         if (response.status == 200) {
+          console.log('success')
+             navigate("/calender");
          } else if (response.data.error) {
            console.log(error);
          }

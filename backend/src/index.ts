@@ -7,6 +7,7 @@ import helmet from "helmet";
 import hpp from "hpp";
 import authRouter from "./routes/authRoutes";
 import eventRouter from "./routes/eventRoutes";
+import cors from 'cors'
 export const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
   max: 100, // Limit each IP to 100 requests per windowMs
@@ -19,7 +20,12 @@ const port = process.env.PORT || 3000;
 app.use(limiter);
 //cross xss attacks
 app.use(helmet());
-
+ app.use(
+   cors({
+     origin: process.env.PORT || "http://localhost:5173", 
+     credentials: true, 
+   })
+ );
 //prevent paramter pullution
 app.use(hpp());
 //body parser
